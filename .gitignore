@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Ignorar imágenes generadas dinámicamente, conservando las carpetas u1, u2 y u3
+View/assets/graficos/u1/*.png
+View/assets/graficos/u2/*.png
+View/assets/graficos/u3/*.png

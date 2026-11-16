@@ -1,0 +1,207 @@
+/* ==========================================================================
+   HORIZONTAL MENU: CALCULADORA ONE MILLION (Estadística & Probabilidad)
+   ========================================================================== */
+
+:root {
+    --bg-navbar: rgba(15, 23, 42, 0.92);
+    --bg-dropdown: #131c31;
+    --text-main: #f8fafc;
+    --text-muted: #64748b;
+    --accent-data: #38bdf8;
+    --accent-success: #00ffaa;
+    --border-grid: rgba(255, 255, 255, 0.08);
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Adaptación automática a los temas opcionales */
+[data-tema="claro"] {
+    --bg-navbar: rgba(255, 255, 255, 0.94);
+    --bg-dropdown: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent-data: #0284c7;
+    --accent-success: #059669;
+    --border-grid: rgba(15, 23, 42, 0.12);
+}
+
+[data-tema="indigo"] {
+    --bg-navbar: rgba(19, 15, 38, 0.94);
+    --bg-dropdown: #1a1433;
+    --accent-data: #38bdf8;
+    --accent-success: #a855f7;
+}
+
+/* Barra de Navegación Principal */
+.sidebar-menu {
+    width: 100%;
+    height: 65px;
+    background-color: var(--bg-navbar);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    padding: 0 28px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-grid);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* Contenedores de las Secciones */
+.menu-section {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
+/* Puente invisible para que no se cierre el desplegable al mover el cursor */
+.menu-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 14px;
+}
+
+/* Título Principal (Extremo izquierdo) */
+.menu-section h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0;
+    padding: 7px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--accent-success);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-section:hover h3 {
+    opacity: 0.92;
+}
+
+/* Títulos de Unidades Desplegables */
+.unidad-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-color: rgba(255, 255, 255, 0.02);
+    transition: all 0.22s ease;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+/* Flecha indicadora automática en cada unidad */
+.unidad-title::after {
+    content: "▾";
+    font-size: 0.78rem;
+    color: var(--accent-data);
+    margin-left: 2px;
+    transition: transform 0.22s ease;
+}
+
+.menu-section:hover .unidad-title::after {
+    transform: rotate(180deg);
+}
+
+/* Hover en el título de la unidad activa */
+.menu-section:hover .unidad-title:not(.text-muted) {
+    background-color: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.35);
+    color: var(--accent-data);
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.12);
+}
+
+/* Unidades deshabilitadas en la barra */
+.unidad-title.text-muted {
+    color: var(--text-muted);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Listas desplegables (Ocultas por defecto) */
+.sidebar-menu ul {
+    list-style: none;
+    padding: 8px;
+    margin: 0;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    background-color: var(--bg-dropdown);
+    border: 1px solid rgba(56, 189, 248, 0.22);
+    border-top: 2px solid var(--accent-success);
+    border-radius: 10px;
+    min-width: 275px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.48);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mostrar lista al hacer hover en la sección */
+.menu-section:hover ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Enlaces del menú */
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+    opacity: 0.85;
+    text-decoration: none;
+    font-size: 0.89rem;
+    font-weight: 500;
+    padding: 9px 12px;
+    border-radius: 7px;
+    border-left: 2px solid transparent;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+}
+
+/* Hover para enlaces activos */
+.menu-link:not(.disabled-link):hover {
+    opacity: 1;
+    background: linear-gradient(90deg, rgba(0, 255, 170, 0.12) 0%, rgba(56, 189, 248, 0.08) 100%);
+    border-left-color: var(--accent-success);
+    color: var(--accent-success);
+    padding-left: 16px;
+}
+
+/* Enlaces deshabilitados (Próximamente) */
+.menu-link.disabled-link {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    background-color: rgba(15, 23, 42, 0.2);
+    border: 1px dashed rgba(100, 116, 139, 0.2);
+    font-style: italic;
+    opacity: 0.65;
+}
