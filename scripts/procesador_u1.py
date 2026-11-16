@@ -295,22 +295,23 @@ def _tabla_frecuencia(params: dict) -> dict:
 
     res_barras = _graficos({
         "tipo_grafico": "barras",
-        "titulo_graf": "1. Gráfico de Barras",
+        "titulo_graf": "Frecuencias absolutas por intervalo de clase",
         "etiquetas": etiquetas_str,
         "frecuencias": frecuencias_str,
     })
     res_circular = _graficos({
         "tipo_grafico": "circular",
-        "titulo_graf": "2. Gráfico Circular",
+        "titulo_graf": "Distribución porcentual por intervalo",
         "etiquetas": etiquetas_str,
         "frecuencias": frecuencias_str,
     })
     res_histograma = _graficos({
         "tipo_grafico": "histograma",
-        "titulo_graf": "3. Histograma y Polígono de Frecuencias",
+        "titulo_graf": "Distribución continua y tendencia de frecuencias",
         "etiquetas": etiquetas_str,
         "frecuencias": frecuencias_str,
     })
+
 
     resultado = construir_resultado(
         titulo="Tabla de Distribución de Frecuencias",
